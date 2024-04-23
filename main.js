@@ -5,6 +5,32 @@ const FULL_HEART = '♥'
 // Your JavaScript code goes here!
 
 
+// Select all the like buttons
+const likeButtons = document.querySelectorAll('.like-glyph');
+
+
+// Add an event listener to each like button
+likeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Toggle the heart between empty and full
+    button.textContent = button.textContent === EMPTY_HEART ? FULL_HEART : EMPTY_HEART;
+
+    // Increment the number of likes
+    const likeCountSpan = button.parentElement.previousElementSibling;
+    const likeCount = parseInt(likeCountSpan.textContent);
+    likeCountSpan.textContent = likeCount + 1;
+
+    // Simulate a server call to record the like
+    mimicServerCall()
+      .then(() => {
+        console.log('Pretend remote server notified of action!');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
+});
+
 
 
 //------------------------------------------------------------------------------
